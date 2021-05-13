@@ -3,6 +3,7 @@
 import chooseClubButton from './choose_club_btn.js';
 import freeVisitPopUp from './free_visit_popup.js';
 import callbackBtn from './callback_btn.js';
+import giftPopup from './gift_popup.js';
 
 
 
@@ -23,6 +24,12 @@ const pageClickHandler = () => {
             elem: '.callback-btn',
             fun: callbackBtn
         },
+        {
+            elem: '.fixed-gift',
+            fun: giftPopup
+
+        },
+
 
 
     ];
