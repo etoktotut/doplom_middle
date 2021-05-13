@@ -1,5 +1,6 @@
 'use strict';
 
-import main from './modules/test.js';
+import pageClickHandler from './modules/page_click_handler.js';
 
-main();
+// обработчик кликов
+pageClickHandler();
