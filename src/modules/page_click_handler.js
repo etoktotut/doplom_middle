@@ -2,6 +2,8 @@
 
 import chooseClubButton from './choose_club_btn.js';
 import freeVisitPopUp from './free_visit_popup.js';
+import callbackBtn from './callback_btn.js';
+
 
 
 
@@ -16,7 +18,13 @@ const pageClickHandler = () => {
         {
             elem: '.open-popup',
             fun: freeVisitPopUp
-        }
+        },
+        {
+            elem: '.callback-btn',
+            fun: callbackBtn
+        },
+
+
     ];
 
 
@@ -34,7 +42,6 @@ const pageClickHandler = () => {
     };
 
     wbody.addEventListener('click', (e) => { bodyClickHandler(e); });
-    console.log('tets');
 
 };
 
