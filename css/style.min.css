@@ -1575,14 +1575,14 @@ nav.popup-menu .close-menu-btn img {
     position: absolute;
     top: 75px;
     margin-top: -18px;
-    z-index: 5;
+    z-index: 100;
     cursor: pointer
 }
 
 .services-slider .slider-arrow span {
     display: block;
-    width: 34px;
-    height: 36px;
+    width: 36px;
+    height: 37px;
     background-color: #f4c71b;
     border-radius: 50%;
     text-align: center;
@@ -1590,11 +1590,11 @@ nav.popup-menu .close-menu-btn img {
 }
 
 .services-slider .slider-arrow.prev {
-    left: 0px
+    left: 2px
 }
 
 .services-slider .slider-arrow.next {
-    right: 0px
+    right: 2px
 }
 
 #gallery {
