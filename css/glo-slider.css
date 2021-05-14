@@ -1,0 +1,21 @@
+.glo-slider {
+    overflow: hidden !important;
+    max-width: 1116px !important;
+    padding-right: 6px !important;
+    padding-left: 6px !important;
+}
+
+.glo-slider__wrap {
+    display: flex !important;
+    transition: transform 0.5s !important;
+    will-change: transform !important;
+}
+
+.glo-slider__item {
+    display: block !important;
+}
+
+.services-slider {
+    overflow: hidden;
+    position: relative;
+}
