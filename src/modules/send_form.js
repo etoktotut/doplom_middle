@@ -1,7 +1,7 @@
 'use strict';
 import clickPopupHandler from './click_popup_handler';
 
-const sendForm = (form, popup = false, popupNew) => {
+const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
     let temp;
     const errorMessage = 'Что-то пошло не так...',
         successMessage = 'Спасибо! Данные отправлены!';
@@ -40,6 +40,9 @@ const sendForm = (form, popup = false, popupNew) => {
                 item.checked = false;
             }
         });
+        if (elForClear) {
+            elForClear();
+        }
     };
 
 
@@ -84,7 +87,6 @@ const sendForm = (form, popup = false, popupNew) => {
 
         if (canSend !== 'OK') {
             statusMessage.textContent = canSend;
-            // console.log('canSend', canSend);
             form.appendChild(statusMessage);
             setTimeout(() => {
                 statusMessage.textContent = '';
@@ -145,7 +147,6 @@ const sendForm = (form, popup = false, popupNew) => {
                         statusMessage.textContent = '';
                         form.innerHTML = temp;
                     }
-                    console.log('before_clear');
                     clearInputs(form);
 
                 }, 3000);

@@ -48,8 +48,12 @@ const validations = () => {
     maskPhone('input[name="phone"]');
 
 
-    const withotEngSymbols = elem =>
+    const withoutEngSymbols = elem =>
         elem.addEventListener('input', () => elem.value = elem.value.replace(/[^а-яёА-ЯЁ ]/gi, ''));
+
+    const withoutEngWithDigits = elem =>
+        elem.addEventListener('input', () => elem.value = elem.value.replace(/[^а-яёА-ЯЁ\d ]/gi, ''));
+
 
     // //только кириллицу, пробелы, цифры и знаки препинания.
     // const validForMessage = elem =>
@@ -72,7 +76,14 @@ const validations = () => {
     //INPUT - валидация текстовых полей
     const textValidations = () => {
         const userNames = document.querySelectorAll('input[name="name"]');
-        userNames.forEach(withotEngSymbols);
+        userNames.forEach(item => {
+            if (!item.closest('.price-message')) {
+                withoutEngSymbols(item);
+            } else {
+                withoutEngWithDigits(item);
+            }
+
+        });
     };
     textValidations();
 
@@ -85,8 +96,12 @@ const validations = () => {
         elem.value = elem.value.replace(/-+/g, '-');
 
         if (elem.name === 'name') {
-            elem.value = elem.value.replace(/[а-яА-Я]+/g,
-                match => match.slice(0, 1).toUpperCase() + match.slice(1).toLowerCase());
+            if (!elem.closest('.price-message')) {
+                elem.value = elem.value.replace(/[а-яА-Я]+/g,
+                    match => match.slice(0, 1).toUpperCase() + match.slice(1).toLowerCase());
+            } else {
+                elem.value = elem.value.toUpperCase();
+            }
         }
 
     });
