@@ -7,7 +7,7 @@ module.exports = {
 
     },
     mode: 'development',
-    devtool: 'inline-source-map',
+    //devtool: 'inline-source-map',
     devServer: {
         open: true,
         port: 8100,

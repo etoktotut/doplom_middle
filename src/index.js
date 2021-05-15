@@ -3,6 +3,8 @@
 import pageClickHandler from './modules/page_click_handler.js';
 import mainSlider from './modules/main_slider.js';
 import carousel from './modules/slider_carousel';
+import sendForm from './modules/send_form';
+import validations from './modules/validations';
 
 // обработчик кликов
 pageClickHandler();
@@ -12,3 +14,15 @@ mainSlider();
 
 //servise slider
 carousel();
+
+//валидации
+validations();
+
+//popup_thanks activate
+
+//отправка форм
+sendForm(document.querySelector('form[name="free-visit-form"]'), true);
+sendForm(document.querySelector('form[name="callback-form"]'), true);
+sendForm(document.querySelector('form[name="banner-form"]'), false, document.querySelector('#thanks'));
+sendForm(document.querySelector('#card_order'), false, document.querySelector('#thanks'));
+sendForm(document.querySelector('#footer_form'), false, document.querySelector('#thanks'));
