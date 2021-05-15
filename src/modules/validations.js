@@ -19,18 +19,15 @@ const validations = () => {
                 val = this.value.replace(/\D/g, "");
 
             let i = 0,
-                newValue = template.replace(/[_\d]/g, function (a) {
-                    let z = i < val.length ? val.charAt(i++) || def.charAt(i) : a;
+                newValue = template.replace(/[_\d]/g, a => {
+                    const z = i < val.length ? val.charAt(i++) || def.charAt(i) : a;
                     return z;
                 });
             i = newValue.indexOf("_");
             if (i !== -1) {
                 newValue = newValue.slice(0, i);
             }
-            let reg = template.substr(0, this.value.length).replace(/_+/g,
-                function (a) {
-                    return "\\d{1," + a.length + "}";
-                }).replace(/[+()]/g, "\\$&");
+            let reg = template.substr(0, this.value.length).replace(/_+/g, a => "\\d{1," + a.length + "}").replace(/[+()]/g, "\\$&");
             reg = new RegExp("^" + reg + "$");
             if (!reg.test(this.value) || this.value.length < 5 || keyCode > 47 && keyCode < 58) {
                 this.value = newValue;
@@ -80,7 +77,7 @@ const validations = () => {
     textValidations();
 
 
-    // BLUR validations для текстовых полей 
+    //BLUR validations для текстовых полей
     const valueValidation = elem => elem.addEventListener('blur', () => {
         elem.value = elem.value.replace(/^[ -]*/, '');
         elem.value = elem.value.replace(/[ -]*$/, '');
