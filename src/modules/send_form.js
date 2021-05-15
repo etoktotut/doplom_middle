@@ -47,10 +47,21 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
 
 
     const formDataValidation = formData => {
+
         const userPhone = formData.querySelector('input[name = "phone"]');
         const userName = formData.querySelector('input[name = "name"]');
         const userPersonalData = formData.querySelector('input[type = "checkbox"]');
         const phoneLength = userPhone.value.replace(/\D/g, '').length;
+
+        if (formData.id === "footer_form") {
+            let i = 0;
+            formData.querySelectorAll('input[type="radio"]').
+                forEach(item => item.checked ? i++ : '');
+            if (i === 0) {
+                return "Вы не выбрали клуб!";
+            }
+        }
+
 
         if (userName) {
             if (userName.value.split(' ')[0].length < 2) {
