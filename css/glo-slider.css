@@ -33,3 +33,30 @@
 .services-slider .slider-arrow.next {
     right: 0px !important;
 }
+
+#gallery .gallery-slider {
+
+    position: relative;
+}
+
+#gallery .gallery-slider .slider-arrow {
+
+    position: absolute;
+
+}
+
+#gallery .gallery-slider .slide {
+    opacity: 0;
+    display: none;
+}
+
+#gallery .gallery-slider .active {
+    display: block;
+    opacity: 0.9;
+}
+
+#gallery .gallery-slider .super {
+    opacity: 1;
+    transition: opacity .4s;
+
+}

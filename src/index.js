@@ -8,6 +8,7 @@ import validations from './modules/validations';
 import { calc, clearCalc } from './modules/calc';
 import burgerInit from './modules/burger_menu';
 import arrowToTop from './modules/arrow_totop';
+import gallerySlider from './modules/gallery_slider';
 
 // обработчик кликов
 pageClickHandler();
@@ -37,3 +38,6 @@ burgerInit();
 
 //стрелка перехода вверх
 arrowToTop();
+
+//слайдер галереи
+gallerySlider();
