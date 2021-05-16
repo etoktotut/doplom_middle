@@ -7,7 +7,7 @@
 
 .glo-slider__wrap {
     display: flex !important;
-    transition: transform 0.5s !important;
+    transition: transform 0.5s;
     will-change: transform !important;
 }
 

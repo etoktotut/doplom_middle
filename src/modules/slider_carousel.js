@@ -10,7 +10,7 @@ const carousel = () => {
     let position = 0;
     const slidesToShow = 5;
     let next, prev;
-    const sliders = wrap.querySelectorAll('.slide');
+    let sliders = wrap.querySelectorAll('.slide');
     const widthSlide = Math.floor(50 / slidesToShow);
 
     const addGloClass = () => {
@@ -21,25 +21,39 @@ const carousel = () => {
         }
     };
     const prevSlide = () => {
-        if (position > 0) {
+        if (position >= 0) {
             --position;
-            if (position < 0) {
-                position = sliders.length - slidesToShow;
+            if (position === -1) {
+                ++position;
+                wrap.style.transition = 'transform 0s';
+                wrap.style.transform = `translateX(-${(position + 1) * widthSlide}%)`;
+                const slideClone = sliders[sliders.length - 1].cloneNode(true);
+                wrap.insertAdjacentElement('afterbegin', slideClone);
+                sliders[sliders.length - 1].remove();
+                sliders = wrap.querySelectorAll('.slide');
+                setTimeout(() => { wrap.style.transition = 'transform 0.5s'; }, 75);
             }
-            wrap.style.transform = `translateX(-${position * widthSlide}%)`;
+            setTimeout(() => { wrap.style.transform = `translateX(-${position * widthSlide}%)`; }, 75);
         }
+
     };
 
     const nextSlide = () => {
         if (position < sliders.length - slidesToShow) {
             ++position;
-            if (position > sliders.length - slidesToShow) {
-                position = 0;
+            if (position === sliders.length - slidesToShow) {
+                --position;
+                wrap.style.transition = 'transform 0s';
+                wrap.style.transform = `translateX(-${(position - 1) * widthSlide}%)`;
+                const slideClone = sliders[0].cloneNode(true);
+                wrap.insertAdjacentElement('beforeend', slideClone);
+                sliders[0].remove();
+                sliders = wrap.querySelectorAll('.slide');
+                setTimeout(() => { wrap.style.transition = 'transform 0.5s'; }, 75);
             }
-            wrap.style.transform = `translateX(-${position * widthSlide}%)`;
+            setTimeout(() => { wrap.style.transform = `translateX(-${position * widthSlide}%)`; }, 75);
         }
     };
-
 
     const controlSlider = () => {
         prev.addEventListener('click', () => prevSlide());
