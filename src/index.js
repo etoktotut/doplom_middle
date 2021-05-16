@@ -7,6 +7,7 @@ import sendForm from './modules/send_form';
 import validations from './modules/validations';
 import { calc, clearCalc } from './modules/calc';
 import burgerInit from './modules/burger_menu';
+import arrowToTop from './modules/arrow_totop';
 
 // обработчик кликов
 pageClickHandler();
@@ -33,3 +34,6 @@ calc();
 
 //бургер меню
 burgerInit();
+
+//стрелка перехода вверх
+arrowToTop();
