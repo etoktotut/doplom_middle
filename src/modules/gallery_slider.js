@@ -31,7 +31,9 @@ const gallerySlider = () => {
 
     const nextSlide = (elem, index, strClass) => {
         elem[index].classList.add(strClass);
-        setTimeout(() => { elem[index].classList.add('super'); }, 100);
+        setTimeout(() => {
+            elem[index].classList.add('super');
+        }, 100);
     };
 
     nextSlide(slide, currentSlide, 'active');
@@ -91,8 +93,7 @@ const gallerySlider = () => {
             currentSlide++;
         } else if (target.closest('#arrow-left')) {
             currentSlide--;
-        }
-        else if (target.closest('.dot')) {
+        } else if (target.closest('.dot')) {
             dot.forEach((elem, index) => {
                 if (elem === target.closest('.dot')) {
                     currentSlide = index;

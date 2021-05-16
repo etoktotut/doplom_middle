@@ -22,6 +22,15 @@ carousel();
 //валидации
 validations();
 
+//слайдер галереи
+gallerySlider();
+
+//бургер меню
+burgerInit();
+
+//стрелка перехода вверх
+arrowToTop();
+
 //popup_thanks activate
 
 //отправка форм
@@ -30,14 +39,13 @@ sendForm(document.querySelector('form[name="callback-form"]'), true);
 sendForm(document.querySelector('form[name="banner-form"]'), false, document.querySelector('#thanks'));
 sendForm(document.querySelector('#card_order'), false, document.querySelector('#thanks'), clearCalc);
 sendForm(document.querySelector('#footer_form'), false, document.querySelector('#thanks'));
+
 //калькулятор
-calc();
+if (document.getElementById('price-total')) {
+    calc();
+}
 
-//бургер меню
-burgerInit();
 
-//стрелка перехода вверх
-arrowToTop();
 
-//слайдер галереи
-gallerySlider();
+
+

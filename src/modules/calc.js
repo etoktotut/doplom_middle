@@ -37,20 +37,17 @@ const calculate = () => {
 const calc = () => {
     const clubItems = document.querySelectorAll('#card_order input[name="club-name"]');
     const cardItems = document.querySelectorAll('#card_order .time input');
-    const priceTotal = document.getElementById('price-total');
     const promo = document.querySelector('.price-message input[name="name"]');
 
     clubItems.forEach(item => item.addEventListener('input', () => { calculate(); }));
     cardItems.forEach(item => item.addEventListener('input', () => { calculate(); }));
     promo.addEventListener('input', () => { calculate(); });
     calculate();
-
 };
 
 const clearCalc = () => {
     document.getElementById('price-total').textContent = '';
     calculate();
-
 };
 
 
