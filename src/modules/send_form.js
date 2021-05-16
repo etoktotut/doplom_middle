@@ -17,9 +17,9 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
                                     <div class="sk-wave-rect"></div>
                                     <div class="sk-wave-rect"></div>
                                 </div>`;
-    //если по результатам отправки должно открыться новое модальное окно, то вешаем на него закрывающие события
+
     if (popupNew) {
-        popupNew.addEventListener('click', e => clickPopupHandler(e, popupNew));
+        popupNew.addEventListener('click', (e) => clickPopupHandler(e, popupNew));
 
     }
 

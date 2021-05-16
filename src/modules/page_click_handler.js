@@ -4,10 +4,7 @@ import chooseClubButton from './choose_club_btn.js';
 import freeVisitPopUp from './free_visit_popup.js';
 import callbackBtn from './callback_btn.js';
 import giftPopup from './gift_popup.js';
-
-
-
-
+import burgerPopup from './burger_popup';
 
 const pageClickHandler = () => {
 
@@ -27,9 +24,11 @@ const pageClickHandler = () => {
         {
             elem: '.fixed-gift',
             fun: giftPopup
-
         },
-
+        {
+            elem: '.menu-button.hidden-large',
+            fun: burgerPopup
+        },
 
 
     ];
