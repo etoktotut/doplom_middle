@@ -1,10 +1,13 @@
 'use strict';
 
 const arrowToTop = () => {
-    const headSliderRect = document.querySelector('header.header-main').getBoundingClientRect();
     const toTop = document.getElementById('totop');
-    const arrowCheck = () => toTop.style.display = window.pageYOffset < headSliderRect.bottom ? 'none' : 'block';
+    const headHeight = document.querySelector('header.header-main').offsetHeight;
+    const arrowCheck = () =>
+        toTop.style.display =
+        window.pageYOffset < document.querySelector('header.header-main').offsetHeight ? 'none' : 'block';
     arrowCheck();
+
     window.addEventListener('scroll', arrowCheck);
 
 };

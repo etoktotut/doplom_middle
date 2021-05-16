@@ -28,8 +28,6 @@ gallerySlider();
 //бургер меню
 burgerInit();
 
-//стрелка перехода вверх
-arrowToTop();
 
 //popup_thanks activate
 
@@ -44,6 +42,9 @@ sendForm(document.querySelector('#footer_form'), false, document.querySelector('
 if (document.getElementById('price-total')) {
     calc();
 }
+
+//стрелка перехода вверх
+arrowToTop();
 
 
 

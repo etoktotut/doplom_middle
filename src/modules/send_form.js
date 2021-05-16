@@ -101,7 +101,11 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
             form.appendChild(statusMessage);
             setTimeout(() => {
                 statusMessage.textContent = '';
-                form.removeChild(statusMessage);
+                //если быстро жать на кнопку отправки, то этого элемента может и не быть
+                // и в консоли полезут ошибки
+                if (document.querySelector('.send-status')) {
+                    form.removeChild(statusMessage);
+                }
             }, 2000);
             return;
         }
