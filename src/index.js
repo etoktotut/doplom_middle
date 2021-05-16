@@ -6,7 +6,7 @@ import carousel from './modules/slider_carousel';
 import sendForm from './modules/send_form';
 import validations from './modules/validations';
 import { calc, clearCalc } from './modules/calc';
-//import clearCalc from './modules/calc';
+import burgerInit from './modules/burger_menu';
 
 // обработчик кликов
 pageClickHandler();
@@ -28,5 +28,8 @@ sendForm(document.querySelector('form[name="callback-form"]'), true);
 sendForm(document.querySelector('form[name="banner-form"]'), false, document.querySelector('#thanks'));
 sendForm(document.querySelector('#card_order'), false, document.querySelector('#thanks'), clearCalc);
 sendForm(document.querySelector('#footer_form'), false, document.querySelector('#thanks'));
-
+//калькулятор
 calc();
+
+//бургер меню
+burgerInit();
