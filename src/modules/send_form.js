@@ -7,9 +7,9 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
         successMessage = 'Спасибо! Данные отправлены!';
 
     const statusMessage = document.createElement('div');
-    statusMessage.className = 'send-status';
+    statusMessage.className = 'send-status-message';
     const statusAnim = document.createElement('div');
-    statusAnim.className = 'send-status';
+    statusAnim.className = 'send-status-anim';
     statusAnim.innerHTML = `<div class="sk-wave sk-center">
                                     <div class="sk-wave-rect"></div>
                                     <div class="sk-wave-rect"></div>
@@ -17,11 +17,23 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
                                     <div class="sk-wave-rect"></div>
                                     <div class="sk-wave-rect"></div>
                                 </div>`;
+    //кнопка ввода формы должна блокироваться, чтобы исключить повторные нажатия
+    const btnSubmit = form.querySelector('.btn');
+
 
     if (popupNew) {
         popupNew.addEventListener('click', (e) => clickPopupHandler(e, popupNew));
 
     }
+
+    const btnDisable = isDisable => {
+        if (isDisable) {
+            btnSubmit.setAttribute('disabled', '');
+        } else {
+            btnSubmit.removeAttribute('disabled');
+        }
+
+    };
 
     const postData = data =>
         fetch('./server.php', {
@@ -94,6 +106,7 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
 
     form.addEventListener('submit', event => {
         event.preventDefault();
+        btnDisable(true);
         const canSend = formDataValidation(form);
 
         if (canSend !== 'OK') {
@@ -103,9 +116,10 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
                 statusMessage.textContent = '';
                 //если быстро жать на кнопку отправки, то этого элемента может и не быть
                 // и в консоли полезут ошибки
-                if (document.querySelector('.send-status')) {
+                if (document.querySelector('.send-status-message')) {
                     form.removeChild(statusMessage);
                 }
+                btnDisable(false);
             }, 2000);
             return;
         }
@@ -125,7 +139,10 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
         postData(JSON.stringify(body))
             .then(response => {
 
-                form.removeChild(statusAnim);
+                if (document.querySelector('.send-status-anim')) {
+                    form.removeChild(statusAnim);
+                }
+
                 if (response.status !== 200) {
                     throw new Error('response status not 200');
                 }
@@ -163,9 +180,10 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
                         form.innerHTML = temp;
                     }
                     clearInputs(form);
+                    btnDisable(false);
 
                 }, 3000);
-                //clearInputs(form);
+
 
                 if (popup) {
                     setTimeout(() => {

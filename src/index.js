@@ -28,9 +28,6 @@ gallerySlider();
 //бургер меню
 burgerInit();
 
-
-//popup_thanks activate
-
 //отправка форм
 sendForm(document.querySelector('form[name="free-visit-form"]'), true);
 sendForm(document.querySelector('form[name="callback-form"]'), true);

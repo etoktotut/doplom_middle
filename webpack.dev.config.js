@@ -1,11 +1,21 @@
 const path = require('path');
-module.exports = {
-    entry: './src/index.js',
-    output: {
-        filename: 'dev-bundle.js',
-        path: path.resolve(__dirname, './dist'),
+//const HTMLWebpackPlugin = require('html-webpack-plugin');
 
+module.exports = {
+    entry: './index.js',
+    output: {
+        // filename: 'dev-bundle.[contenthash].js',
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'build'),
     },
+    context: path.resolve(__dirname, 'src'),
+    // plugins: [
+    //     new HTMLWebpackPlugin({
+    //         template: './index.html'
+    //     })
+
+    // ],
+
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {

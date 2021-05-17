@@ -70,7 +70,6 @@ const carousel = () => {
         next.innerHTML = '<span><img src="./images/arrow-right.png" alt=""></span> ';
         main.insertAdjacentElement('beforeend', prev);
         main.insertAdjacentElement('beforeend', next);
-
     };
 
     addGloClass();

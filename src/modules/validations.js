@@ -1,3 +1,5 @@
+'use strict';
+
 //только Кириллица + пробел
 const validations = () => {
 
@@ -6,8 +8,6 @@ const validations = () => {
         document.querySelectorAll('input[name="name"]').forEach(elem => elem.setAttribute('maxlength', "28"));
     };
     userNameMaxLength();
-
-
 
     function maskPhone(selector, masked = '+7 (___) ___-__-__') {
         const elems = document.querySelectorAll(selector);
@@ -54,25 +54,6 @@ const validations = () => {
     const withoutEngWithDigits = elem =>
         elem.addEventListener('input', () => elem.value = elem.value.replace(/[^а-яёА-ЯЁ\d ]/gi, ''));
 
-
-    // //только кириллицу, пробелы, цифры и знаки препинания.
-    // const validForMessage = elem =>
-    //     elem.addEventListener('input',
-    //         () => elem.value = elem.value.replace(/[^а-яёА-ЯЁ \d.,;:\-?!()"«»]/gi, ''));
-
-    //только цифры
-    // const approvedDigits = elem =>
-    //     elem.addEventListener('input', () => elem.value = elem.value.replace(/\D/g, ''));
-    // //e-mail
-
-
-    // //Калькулятор
-    // const calcValidations = () => {
-    //     const calcInputs = document.querySelectorAll('#calc input');
-    //     calcInputs.forEach(approvedDigits);
-    // };
-    // calcValidations();
-
     //INPUT - валидация текстовых полей
     const textValidations = () => {
         const userNames = document.querySelectorAll('input[name="name"]');
@@ -86,7 +67,6 @@ const validations = () => {
         });
     };
     textValidations();
-
 
     //BLUR validations для текстовых полей
     const valueValidation = elem => elem.addEventListener('blur', () => {
@@ -112,8 +92,6 @@ const validations = () => {
     };
 
     blurValidationUserName();
-
-
 
 };
 
