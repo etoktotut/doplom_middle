@@ -113,8 +113,8 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
                 statusMessage.textContent = '';
                 //если быстро жать на кнопку отправки, то этого элемента может и не быть
                 // и в консоли полезут ошибки
-                if (document.querySelector('.send-status.message')) {
-                    form.removeChild(statusMessage);
+                if (form.querySelector('.send-status.message')) {
+                    form.removeChild(form.querySelector('.send-status.message'));
                 }
                 btnDisable(false);
 
@@ -135,8 +135,8 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
         postData(JSON.stringify(body))
             .then(response => {
 
-                if (document.querySelector('.send-status.anim')) {
-                    form.removeChild(document.querySelector('.send-status.anim'));
+                if (form.querySelector('.send-status.anim')) {
+                    form.removeChild(form.querySelector('.send-status.anim'));
                 }
 
                 if (response.status !== 200) {
