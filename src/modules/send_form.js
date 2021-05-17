@@ -2,9 +2,8 @@
 import clickPopupHandler from './click_popup_handler';
 
 const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
-    let temp;
-    const errorMessage = 'Что-то пошло не так...',
-        successMessage = 'Спасибо! Данные отправлены!';
+
+    const tempInnerHTML = popupNew.innerHTML;
 
     const statusMessage = document.createElement('div');
     statusMessage.className = 'send-status message';
@@ -20,7 +19,6 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
 
     if (popupNew) {
         popupNew.addEventListener('click', (e) => clickPopupHandler(e, popupNew));
-
     }
 
     const btnDisable = isDisable => {
@@ -54,9 +52,7 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
         }
     };
 
-
     const formDataValidation = formData => {
-
         const userPhone = formData.querySelector('input[name = "phone"]');
         const userName = formData.querySelector('input[name = "name"]');
         const userPersonalData = formData.querySelector('input[type = "checkbox"]');
@@ -70,7 +66,6 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
                 return "Вы не выбрали клуб!";
             }
         }
-
 
         if (userName) {
             if (userName.value.split(' ')[0].length < 2) {
@@ -99,11 +94,10 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
         }
     });
 
-    temp = form.innerHTML;
-
     form.addEventListener('submit', event => {
         event.preventDefault();
         btnDisable(true);
+        popupNew.innerHTML = tempInnerHTML;
         const canSend = formDataValidation(form);
 
         if (canSend !== 'OK') {
@@ -111,8 +105,7 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
             form.appendChild(statusMessage);
             setTimeout(() => {
                 statusMessage.textContent = '';
-                //если быстро жать на кнопку отправки, то этого элемента может и не быть
-                // и в консоли полезут ошибки
+
                 if (form.querySelector('.send-status.message')) {
                     form.removeChild(form.querySelector('.send-status.message'));
                 }
@@ -143,49 +136,29 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
                     throw new Error('response status not 200');
                 }
 
-                statusMessage.textContent = successMessage;
                 if (popup) {
-
-                    form.innerHTML = '';
-                    form.appendChild(statusMessage);
-                } else {
-                    popupNew.style.display = 'block';
+                    form.closest('.popup').style.display = 'none';
                 }
+                popupNew.style.display = 'block';
 
             })
             .catch(error => {
                 console.error(error);
                 if (popup) {
-                    statusMessage.textContent = errorMessage;
-                    form.innerHTML = '';
-                    form.appendChild(statusMessage);
-                } else {
-                    popupNew.querySelector('.form-content').innerHTML = `
+                    form.closest('.popup').style.display = 'none';
+                }
+                popupNew.querySelector('.form-content').innerHTML = `
                     <h4>Ошибка !</h4>
                 <p>Ваша заявка не была отправлена.</p>
                        `;
-                    popupNew.style.display = 'block';
-                }
-
+                popupNew.style.display = 'block';
             })
             .finally(() => {
-
-                setTimeout(() => {
-                    if (popup) {
-                        statusMessage.textContent = '';
-                        form.innerHTML = temp;
-                    }
-                    clearInputs(form);
-                    btnDisable(false);
-
-                }, 2600);
-
-
                 if (popup) {
-                    setTimeout(() => {
-                        form.closest('.popup').style.display = 'none';
-                    }, 2500);
+                    form.closest('.popup').style.display = 'none';
                 }
+                clearInputs(form);
+                btnDisable(false);
             });
     });
 };

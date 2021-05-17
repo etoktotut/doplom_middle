@@ -29,8 +29,8 @@ gallerySlider();
 burgerInit();
 
 //отправка форм
-sendForm(document.querySelector('form[name="free-visit-form"]'), true);
-sendForm(document.querySelector('form[name="callback-form"]'), true);
+sendForm(document.querySelector('form[name="free-visit-form"]'), true, document.querySelector('#thanks'));
+sendForm(document.querySelector('form[name="callback-form"]'), true, document.querySelector('#thanks'));
 sendForm(document.querySelector('form[name="banner-form"]'), false, document.querySelector('#thanks'));
 sendForm(document.querySelector('#card_order'), false, document.querySelector('#thanks'), clearCalc);
 sendForm(document.querySelector('#footer_form'), false, document.querySelector('#thanks'));
