@@ -7,9 +7,9 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
         successMessage = 'Спасибо! Данные отправлены!';
 
     const statusMessage = document.createElement('div');
-    statusMessage.className = 'send-status-message';
+    statusMessage.className = 'send-status message';
     const statusAnim = document.createElement('div');
-    statusAnim.className = 'send-status-anim';
+    statusAnim.className = 'send-status anim';
     statusAnim.innerHTML = `<div class="sk-wave sk-center">
                                     <div class="sk-wave-rect"></div>
                                     <div class="sk-wave-rect"></div>
@@ -17,9 +17,6 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
                                     <div class="sk-wave-rect"></div>
                                     <div class="sk-wave-rect"></div>
                                 </div>`;
-    //кнопка ввода формы должна блокироваться, чтобы исключить повторные нажатия
-    const btnSubmit = form.querySelector('.btn');
-
 
     if (popupNew) {
         popupNew.addEventListener('click', (e) => clickPopupHandler(e, popupNew));
@@ -27,12 +24,12 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
     }
 
     const btnDisable = isDisable => {
+        const btnSubmit = form.querySelector('.btn');
         if (isDisable) {
             btnSubmit.setAttribute('disabled', '');
         } else {
             btnSubmit.removeAttribute('disabled');
         }
-
     };
 
     const postData = data =>
@@ -96,13 +93,13 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
         return 'OK';
     };
 
-
-
     form.querySelectorAll('input[type = "checkbox"]').forEach(item => {
         if (item.closest('.personal-data')) {
             item.removeAttribute('required');
         }
     });
+
+    temp = form.innerHTML;
 
     form.addEventListener('submit', event => {
         event.preventDefault();
@@ -116,18 +113,17 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
                 statusMessage.textContent = '';
                 //если быстро жать на кнопку отправки, то этого элемента может и не быть
                 // и в консоли полезут ошибки
-                if (document.querySelector('.send-status-message')) {
+                if (document.querySelector('.send-status.message')) {
                     form.removeChild(statusMessage);
                 }
                 btnDisable(false);
+
             }, 2000);
             return;
         }
 
         const formData = new FormData(form);
-        if (popup) {
-            temp = form.innerHTML;
-        }
+
         form.appendChild(statusAnim);
 
         const body = {};
@@ -139,8 +135,8 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
         postData(JSON.stringify(body))
             .then(response => {
 
-                if (document.querySelector('.send-status-anim')) {
-                    form.removeChild(statusAnim);
+                if (document.querySelector('.send-status.anim')) {
+                    form.removeChild(document.querySelector('.send-status.anim'));
                 }
 
                 if (response.status !== 200) {
@@ -149,6 +145,7 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
 
                 statusMessage.textContent = successMessage;
                 if (popup) {
+
                     form.innerHTML = '';
                     form.appendChild(statusMessage);
                 } else {
@@ -159,7 +156,6 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
             .catch(error => {
                 console.error(error);
                 if (popup) {
-                    // statusAnim.replaceWith(statusMessage);
                     statusMessage.textContent = errorMessage;
                     form.innerHTML = '';
                     form.appendChild(statusMessage);
@@ -182,7 +178,7 @@ const sendForm = (form, popup = false, popupNew = null, elForClear = null) => {
                     clearInputs(form);
                     btnDisable(false);
 
-                }, 3000);
+                }, 2600);
 
 
                 if (popup) {
